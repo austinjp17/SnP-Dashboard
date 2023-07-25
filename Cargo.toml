@@ -1,0 +1,26 @@
+[package]
+name = "string_sum"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[lib]
+name = "string_sum"
+crate-type = ["cdylib"]
+
+[dependencies]
+pyo3 = { version = "0.14", features = ["extension-module"] }
+pyo3-asyncio = { version = "0.14", features = ["attributes", "tokio-runtime"] }
+snp500_data = {path = "../snp500-data-retrieval"}
+polars-core = {version = "0.31.1", features = ["rows"]}
+polars = {version = "0.31.1", features = ["object"]}
+anyhow = "1.0.72"
+csv = "1.2.2"
+tokio = { version = "1", features = ["full"] }
+chrono = "0.4.26"
+pyo3-polars = "0.5.0"
+arrow2 = "0.17.3"
+arrow-flight = "44.0.0"
+libc = "0.2.147"
+
+
