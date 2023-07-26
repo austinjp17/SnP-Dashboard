@@ -6,11 +6,19 @@ use polars_core::prelude::*;
 use std::{collections::HashMap};
 use crate::av;
 
+pub fn add_identifier_col(text: &str, df: &mut DataFrame) -> DataFrame {
+    let height = df.height();
+    let temp_vec = vec![text; height];
+    let temp_series = Series::new("identifier", temp_vec);
+    let ret_df = df.with_column(temp_series).unwrap().clone();
+    ret_df
+}
+
 /// Create hashmap with group keys as map keys mapped to vec of df's
 pub async fn groupByToHashMap(
     data:DataFrame, 
     groups: GroupBy<'_>,
-    group_filter: Vec<&str>
+    group_filter: Option<Vec<&str>>
 ) -> Result<HashMap<String, Vec<DataFrame>>> {
     // initialize data vectors
     let mut sector_data_map:HashMap<String, Vec<DataFrame>> = HashMap::new();
@@ -23,13 +31,18 @@ pub async fn groupByToHashMap(
         let group_indexes = vals.get(i).unwrap();
 
         // sector lock
-        if !group_filter.contains(&hash_key.get_str().unwrap()) {
-            // println!("Skipping: {}", hash_key.get_str().unwrap());
-            continue;
-        } 
+        if let Some(target_vec) = &group_filter {
+            if !target_vec.contains(&hash_key.get_str().unwrap()) {
+                // println!("Skipping: {}", hash_key.get_str().unwrap());
+                continue;
+            } 
+        }
+        
+        
+        
         match hash_key {
             Utf8(sector) => {
-                println!("{}", sector);
+                println!("Grouping {}...", sector);
                 for company_index in group_indexes.iter() {
                     
                     match company_index {

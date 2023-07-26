@@ -9,7 +9,7 @@ name = "string_sum"
 crate-type = ["cdylib"]
 
 [dependencies]
-pyo3 = { version = "0.19.0" }
+pyo3 = { version = "0.19.0", features = ["hashbrown"] }
 pyo3-asyncio = { version = "0.19", features = ["attributes", "tokio-runtime"] }
 snp500_data = {path = "../snp500-data-retrieval"}
 polars-core = {version = "0.31.1", features = ["rows"]}
@@ -27,7 +27,6 @@ pyo3-polars = "0.5.0"
 arrow-flight = "44.0.0"
 libc = "0.2.147"
 pyo3-macros = "0.19.1"
-cargo-sort = "1.0.9"
 serde_json = "1.0.103"
 serde = "1.0.175"
 
