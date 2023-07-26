@@ -1,15 +1,12 @@
 
 import asyncio
-import string_sum
-import polar as pl
+import rust
+import polars
+# from sklearn.metrics import plot_confusion_matrix
 
 async def main(): 
-    df = pl.DataFrame({
-        "foo": [1, 2, None],
-        "bar": ["a", None, "c"],
-    })
-    out_df = my_cool_function(df)
-    res = await string_sum.get_data()
+#    pass
+    res = await rust.get_arrow_data()
     print(res)
     
 if __name__ == "__main__":

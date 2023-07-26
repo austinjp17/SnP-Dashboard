@@ -70,7 +70,7 @@ pub fn avg_dfs(
     for key in sector_data_map.keys() {
         let mut queue = sector_data_map.get(key).unwrap().clone();
         let init_len = queue.len();
-        println!("Init Queue: {}", queue.len());
+        // println!("Init Queue: {}", queue.len());
         while queue.len() > 1 {
             // queue.pop();
             let df1 = queue.pop().unwrap();
@@ -83,7 +83,7 @@ pub fn avg_dfs(
             
         }
 
-        println!("{}", queue.get(0).unwrap().head(Some(5)));
+        // println!("{}", queue.get(0).unwrap().head(Some(5)));
 
         // divide col by count
         let mut res = queue.get(0).unwrap().clone();
